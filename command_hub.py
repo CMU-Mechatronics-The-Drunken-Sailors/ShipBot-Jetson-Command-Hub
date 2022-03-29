@@ -7,7 +7,7 @@
 import serial
 import sys
 
-# open ports - how to automate port assignment?
+# open ports - how to automate port assignment? see: https://stackoverflow.com/questions/24214643/python-to-automatically-select-serial-ports-for-arduino
 mega_port = serial.Serial('/dev/ttyACM0', '115200')
 # uno_port = serial.Serial('/dev/ttyACM1', '115200')
 # SKR_port = serial.Serial('/dev/ttyACM2', '115200')
