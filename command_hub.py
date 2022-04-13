@@ -8,12 +8,16 @@ import serial
 import serial.tools.list_ports
 import sys
 
+BAUD_RATE = 115200
+mega_port = ''
+uno_port = ''
+SKR_port = ''
+
 # open ports
 def initialize_ports():
-    BAUD_RATE = 115200
-    mega_port = uno_port = SKR_port = None
-
+    global mega_port, uno_port, SKR_port
     ports = list(serial.tools.list_ports.comports())
+    
     for p in ports:
         print(p)
 
@@ -51,18 +55,18 @@ def get_stepper_commands():
 if __name__ == '__main__':
     initialize_ports()
 
-    # while (1):
+    while (1):
         # grab input for DC motors and send to Mega
-        # DC_commands = get_DC_commands()
-        # mega_port.write(DC_commands.encode())
-        # mega_echo = mega_port.readline()
-        # print(mega_echo)
+        DC_commands = get_DC_commands()
+        mega_port.write(DC_commands.encode())
+        mega_echo = mega_port.readline()
+        print(mega_echo)
   
         # grab input for linear actuators and send to Uno
-        # LA_commands = get_LA_commands()
-        # uno_port.write(LA_commands.encode())
-        # uno_echo = uno_port.readline()
-        # print(uno_echo)  
+        LA_commands = get_LA_commands()
+        uno_port.write(LA_commands.encode())
+        uno_echo = uno_port.readline()
+        print(uno_echo)  
   
         # grab input for stepper motors and send to SKR
         # stepper_commands = get_stepper_commands()
