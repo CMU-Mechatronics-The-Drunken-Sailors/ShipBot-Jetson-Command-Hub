@@ -9,7 +9,7 @@ import sys
 
 # open ports - how to automate port assignment? see: https://stackoverflow.com/questions/24214643/python-to-automatically-select-serial-ports-for-arduino
 mega_port = serial.Serial('/dev/ttyACM0', '115200')
-uno_port = serial.Serial('/dev/ttyACM1', '115200')
+# uno_port = serial.Serial('/dev/ttyACM1', '115200')
 # SKR_port = serial.Serial('/dev/ttyACM3', '115200')
 
 while (1):
@@ -17,13 +17,13 @@ while (1):
   DC_motor_commands = input("DC Motor Commands:\n")
   DC_motor_commands += '\n'
   mega_port.write(DC_motor_commands.encode())
-  # mega_echo = mega_port.readline()
-  # print(mega_echo)
+  mega_echo = mega_port.readline()
+  print(mega_echo)
   
   # grab input for linear actuators and send to Uno
-  linear_actuator_commands = input("Linear Actuator Commands:\n")
-  linear_actuator_commands += '\n'
-  uno_port.write(linear_actuator_commands.encode())
+  # linear_actuator_commands = input("Linear Actuator Commands:\n")
+  # linear_actuator_commands += '\n'
+  # uno_port.write(linear_actuator_commands.encode())
   # uno_echo = uno_port.readline()
   # print(uno_echo)  
   
