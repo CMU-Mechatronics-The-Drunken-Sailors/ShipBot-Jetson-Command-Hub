@@ -5,13 +5,10 @@ import serial.tools.list_ports
 import sys
 
 BAUD_RATE = 115200
-mega_port = ''
-uno_port = ''
-SKR_port = ''
 
 # open ports
 def initialize_ports():
-    global mega_port, uno_port, SKR_port
+    mega_port = uno_port = SKR_port = None
     ports = list(serial.tools.list_ports.comports())
     
     for p in ports:
@@ -28,3 +25,5 @@ def initialize_ports():
         elif "Mode" in p.description:
             SKR_port = serial.Serial(p.device, BAUD_RATE)
             print("SKR found!")
+
+    return (mega_port, uno_port, SKR_port)

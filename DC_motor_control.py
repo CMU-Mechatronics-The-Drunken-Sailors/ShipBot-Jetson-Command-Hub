@@ -1,8 +1,9 @@
 # sends new DC motor speeds to the Mega
 
-import initialization
+import serial
+import sys
 
-def set_DC_motors():
+def set_DC_motors(mega_port):
     DC_commands = input("DC Motor Commands:\n")
     DC_commands += '\n'
     mega_port.write(DC_commands.encode())

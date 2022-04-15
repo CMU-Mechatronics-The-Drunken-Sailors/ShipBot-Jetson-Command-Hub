@@ -1,8 +1,9 @@
 # sends new stepper motor positions to the SKR
 
-import initialization
+import serial
+import sys
 
-def get_stepper_commands():
+def set_stepper_motors(SKR_port):
     stepper_commands = input("Stepper Motor Commands:\n")
     stepper_commands += '\n'
     SKR_port.write(stepper_commands.encode())
