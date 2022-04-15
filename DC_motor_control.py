@@ -2,7 +2,7 @@
 
 import initialization
 
-def get_DC_commands():
+def set_DC_motors():
     DC_commands = input("DC Motor Commands:\n")
     DC_commands += '\n'
     mega_port.write(DC_commands.encode())
