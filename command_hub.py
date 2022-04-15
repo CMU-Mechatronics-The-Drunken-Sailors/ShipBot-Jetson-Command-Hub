@@ -4,34 +4,7 @@
 # for Uno, sends command of 2 values indicating direction of linear actuators (pair and solo LAs)
 # for SKR, sends command of 3 values indicating stepper motor positions (X, Y, Z)
 
-import serial
-import serial.tools.list_ports
-import sys
-
-BAUD_RATE = 115200
-mega_port = ''
-uno_port = ''
-SKR_port = ''
-
-# open ports
-def initialize_ports():
-    global mega_port, uno_port, SKR_port
-    ports = list(serial.tools.list_ports.comports())
-    
-    for p in ports:
-        print(p)
-
-        if "Mega" in p.description:
-            mega_port = serial.Serial(p.device, BAUD_RATE)
-            print("Mega found!")
-
-        elif "Uno" in p.description:
-            uno_port = serial.Serial(p.device, BAUD_RATE)
-            print("Uno found!")
-
-        elif "Mode" in p.description:
-            SKR_port = serial.Serial(p.device, BAUD_RATE)
-            print("SKR found!")
+import initialization
 
 # fetch DC motor commands
 def get_DC_commands():
