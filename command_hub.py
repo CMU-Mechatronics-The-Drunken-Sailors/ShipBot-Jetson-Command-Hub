@@ -5,6 +5,9 @@
 # for SKR, sends command of 3 values indicating stepper motor positions (X, Y, Z)
 
 import initialization
+# import DC_motor_control
+# import linear_actuator_control
+# import stepper_motor_control
 
 # fetch DC motor commands
 def get_DC_commands():
