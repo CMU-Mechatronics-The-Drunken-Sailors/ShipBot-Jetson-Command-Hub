@@ -6,8 +6,8 @@
 
 import initialization as init
 import DC_motor_control as Mega
-# import linear_actuator_control as Uno
-# import stepper_motor_control as SKR
+import linear_actuator_control as Uno
+import stepper_motor_control as SKR
 
 # user input for testing/debugging
 def manual_control():
@@ -25,14 +25,14 @@ def manual_control():
         # if LA_commands == '':
         #     return
         # else:
-        #     set_linear_actuators(uno_port, LA_commands)
+        #     Uno.set_linear_actuators(uno_port, LA_commands)
   
         # send stepper motor commands to SKR
         # stepper_commands = input("Stepper Motor Commands:\n") # user input for testing/debugging
         # if stepper_commands == '':
         #     return
         # else:
-        #     set_stepper_motors(SKR_port, stepper_commands)
+        #     SKR.set_stepper_motors(SKR_port, stepper_commands)
 
 if __name__ == '__main__':
     # open USB ports
