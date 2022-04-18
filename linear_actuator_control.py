@@ -8,13 +8,9 @@ import sys
 # LA pair retracted (R), LA solo extended (E) -> -255 255 -> arm and tip are bent
 # LA pair extended (E), LA solo retracted (R) -> 255 -255 -> arm and tip are straight
 # LA pair extended (E), LA solo extended (E) -> 255 255 -> arm is straight, tip is bent
-def set_linear_actuators(uno_port):
-    LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
-
+def set_linear_actuators(uno_port, LA_commands):
     # check for one of the four positions above
-    if LA_commands == '':
-        return
-    elif LA_commands == 'RR':
+    if LA_commands == 'RR':
         LA_commands = '-255 -255'
     elif LA_commands == 'RE':
         LA_commands = '-255 255'
