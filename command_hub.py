@@ -9,16 +9,16 @@ from DC_motor_control import *
 from linear_actuator_control import *
 from stepper_motor_control import *
 
+# user input for testing/debugging
 def manual_control():
     while (1):
         # send DC motor commands to Mega
-        DC_commands = input("DC Motor Commands:\n") # user input for testing/debugging
-        if DC_commands == '':
-            return
-        DC_commands += '\n'
-        mega_port.write(DC_commands.encode())
-        mega_echo = mega_port.readline()
-        print(mega_echo)
+        DC_commands = input("DC Motor Commands:\n")
+        if DC_commands != '':
+            DC_commands += '\n'
+            mega_port.write(DC_commands.encode())
+            mega_echo = mega_port.readline()
+            print(mega_echo)
   
         # send linear actuators commands to Uno
         LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
