@@ -3,12 +3,8 @@
 import serial
 import sys
 
-def set_stepper_motors(SKR_port):
-    stepper_commands = input("Stepper Motor Commands:\n")
-
-    if stepper_commands == '':
-        return
-
+# send to SKR
+def set_stepper_motors(SKR_port, stepper_commands):
     stepper_commands += '\n'
     SKR_port.write(stepper_commands.encode())
     SKR_echo = SKR_port.readline()
