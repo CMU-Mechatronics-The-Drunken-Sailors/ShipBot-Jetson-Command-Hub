@@ -15,11 +15,23 @@ if __name__ == '__main__':
     camera = initialize_camera()
 
     while (1):
-        # grab input for DC motors and send to Mega
-        set_DC_motors(mega_port)
+        # send DC motor commands to Mega
+        DC_commands = input("DC Motor Commands:\n") # user input for testing/debugging
+        if DC_commands == '':
+            return
+        elif:
+            set_DC_motors(mega_port, DC_commands)
   
-        # grab input for linear actuators and send to Uno
-        set_linear_actuators(uno_port)
+        # send linear actuators commands to Uno
+        LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
+        if LA_commands == '':
+            return
+        elif:
+            set_linear_actuators(uno_port, LA_commands)
   
-        # grab input for stepper motors and send to SKR
-        set_stepper_motors(SKR_port)
+        # send stepper motor commands to SKR
+        stepper_commands = input("Stepper Motor Commands:\n") # user input for testing/debugging
+        if stepper_commands == '':
+            return
+        elif:
+            set_stepper_motors(SKR_port, stepper_commands)
