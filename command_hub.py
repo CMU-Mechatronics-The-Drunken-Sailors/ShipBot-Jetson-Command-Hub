@@ -9,18 +9,16 @@ from DC_motor_control import *
 from linear_actuator_control import *
 from stepper_motor_control import *
 
-if __name__ == '__main__':
-    # open USB ports
-    (mega_port, uno_port, SKR_port) = initialize_ports()
-    camera = initialize_camera()
-
+def manual_control():
     while (1):
         # send DC motor commands to Mega
         DC_commands = input("DC Motor Commands:\n") # user input for testing/debugging
         if DC_commands == '':
             return
-        elif:
-            set_DC_motors(mega_port, DC_commands)
+        DC_commands += '\n'
+        mega_port.write(DC_commands.encode())
+        mega_echo = mega_port.readline()
+        print(mega_echo)
   
         # send linear actuators commands to Uno
         LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
@@ -35,3 +33,10 @@ if __name__ == '__main__':
             return
         elif:
             set_stepper_motors(SKR_port, stepper_commands)
+
+if __name__ == '__main__':
+    # open USB ports
+    (mega_port, uno_port, SKR_port) = initialize_ports()
+    camera = initialize_camera()
+
+    manual_control()
