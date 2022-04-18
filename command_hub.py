@@ -21,11 +21,16 @@ def manual_control():
             print(mega_echo)
   
         # send linear actuators commands to Uno
-        # LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
-        # if LA_commands == '':
-        #     return
-        # else:
-        #     Uno.set_linear_actuators(uno_port, LA_commands)
+        LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
+        if LA_commands != '':
+            if LA_commands == 'RR':
+                Uno.retract_pair_retract_solo()
+            elif LA_commands == 'RE':
+                Uno.retract_pair_extend_solo()
+            elif LA_commands == 'ER':
+                Uno.extend_pair_retract_solo()
+            elif LA_commands == 'EE':
+                Uno.extend_pair_extend_solo()
   
         # send stepper motor commands to SKR
         # stepper_commands = input("Stepper Motor Commands:\n") # user input for testing/debugging
