@@ -5,7 +5,7 @@
 # for SKR, sends command of 3 values indicating stepper motor positions (X, Y, Z)
 
 from initialization import *
-# from DC_motor_control import *
+from DC_motor_control import *
 from linear_actuator_control import *
 from stepper_motor_control import *
 
@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     while (1):
         # grab input for DC motors and send to Mega
-        # set_DC_motors(mega_port)
+        set_DC_motors(mega_port)
   
         # grab input for linear actuators and send to Uno
         set_linear_actuators(uno_port)
