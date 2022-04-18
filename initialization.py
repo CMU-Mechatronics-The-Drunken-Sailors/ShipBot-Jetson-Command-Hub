@@ -3,13 +3,17 @@
 import serial
 import serial.tools.list_ports
 import sys
-import pyrealsense2.pyrealsense2 as rs
+import pyrealsense2 as rs
 
 BAUD_RATE = 115200
+mega_port = None
+uno_port = None
+SKR_port = None
+pipeline = None
 
 # opens and returns serial ports to connect to Mega, Uno, and SKR
 def initialize_ports():
-    mega_port = uno_port = SKR_port = None
+    global mega_port, uno_port, SKR_port
     ports = list(serial.tools.list_ports.comports())
     
     # go thru open ports
@@ -28,10 +32,10 @@ def initialize_ports():
             SKR_port = serial.Serial(p.device, BAUD_RATE)
             print("SKR found!")
 
-    return (mega_port, uno_port, SKR_port)
-
 # opens and returns the camera pipeline
 def initialize_camera():
+    global pipeline
+
      # configure depth and color streams
     pipeline = rs.pipeline()
     config = rs.config()
@@ -63,5 +67,3 @@ def initialize_camera():
 
     # start streaming
     pipeline.start(config)
-
-    return pipeline

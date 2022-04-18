@@ -4,10 +4,10 @@
 # for Uno, sends command of 2 values indicating direction of linear actuators (pair and solo LAs)
 # for SKR, sends command of 3 values indicating stepper motor positions (X, Y, Z)
 
-from initialization import *
-from DC_motor_control import *
-from linear_actuator_control import *
-from stepper_motor_control import *
+import initialization as init
+import DC_motor_control as Mega
+# import linear_actuator_control as Uno
+# import stepper_motor_control as SKR
 
 # user input for testing/debugging
 def manual_control():
@@ -16,27 +16,31 @@ def manual_control():
         DC_commands = input("DC Motor Commands:\n")
         if DC_commands != '':
             DC_commands += '\n'
-            mega_port.write(DC_commands.encode())
-            mega_echo = mega_port.readline()
+            init.mega_port.write(DC_commands.encode())
+            mega_echo = init.mega_port.readline()
             print(mega_echo)
   
         # send linear actuators commands to Uno
-        LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
-        if LA_commands == '':
-            return
-        elif:
-            set_linear_actuators(uno_port, LA_commands)
+        # LA_commands = input("Linear Actuator Commands:\n") # user input for testing/debugging
+        # if LA_commands == '':
+        #     return
+        # else:
+        #     set_linear_actuators(uno_port, LA_commands)
   
         # send stepper motor commands to SKR
-        stepper_commands = input("Stepper Motor Commands:\n") # user input for testing/debugging
-        if stepper_commands == '':
-            return
-        elif:
-            set_stepper_motors(SKR_port, stepper_commands)
+        # stepper_commands = input("Stepper Motor Commands:\n") # user input for testing/debugging
+        # if stepper_commands == '':
+        #     return
+        # else:
+        #     set_stepper_motors(SKR_port, stepper_commands)
 
 if __name__ == '__main__':
     # open USB ports
-    (mega_port, uno_port, SKR_port) = initialize_ports()
-    camera = initialize_camera()
+    init.initialize_ports()
+    init.initialize_camera()
 
-    manual_control()
+    # manual_control()
+
+    # test DC functions
+    # Mega.set_DC_motors(0, 0, 0, 0)
+    # encoder_ticks = Mega.get_encoder_ticks()
