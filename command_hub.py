@@ -12,6 +12,7 @@ from stepper_motor_control import *
 if __name__ == '__main__':
     # open USB ports
     (mega_port, uno_port, SKR_port) = initialize_ports()
+    camera = initialize_camera()
 
     while (1):
         # grab input for DC motors and send to Mega
