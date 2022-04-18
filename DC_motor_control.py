@@ -3,12 +3,8 @@
 import serial
 import sys
 
-def set_DC_motors(mega_port):
-    DC_commands = input("DC Motor Commands:\n")
-
-    if DC_commands == '':
-        return
-
+# send to Mega
+def set_DC_motors(mega_port, DC_commands):
     DC_commands += '\n'
     mega_port.write(DC_commands.encode())
     mega_echo = mega_port.readline()
