@@ -8,6 +8,7 @@ import initialization as init
 import DC_motor_control as Mega
 import linear_actuator_control as Uno
 import stepper_motor_control as SKR
+import mission_parser as parser
 
 # user input for testing/debugging
 def manual_control():
