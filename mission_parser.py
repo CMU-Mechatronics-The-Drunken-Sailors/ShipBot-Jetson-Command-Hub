@@ -1,7 +1,7 @@
 # parses mission file and returns list of tuples denoting tasks in order
 #
-# tuples of three elements are valves: (station, valve-number, valve-position)
-# tuples of four elements are breakers: (station, breaker-box, breaker-number, breaker-position)
+# tuples of two elements are valves: (valve-number, valve-position)
+# tuples of three elements are breakers: (breaker-box, breaker-number, breaker-position)
 #
 # station is A-H
 # valve-number is 1, 2, or 3
@@ -14,6 +14,23 @@
 
 import sys
 
+# create station class
+class station:
+  def __init__(self, name):
+    self.name = name
+    self.task_type = '0' # 'V' for valve, 'B' for breaker
+    self.task_list = []
+
+# declare 8 stations, A-H
+station_A = station('A')
+station_B = station('B')
+station_C = station('C')
+station_D = station('D')
+station_E = station('E')
+station_F = station('F')
+station_G = station('G')
+station_H = station('H')
+
 # returns list of tuples denoting tasks in order
 def read_mission_file():
   # open file and return text
@@ -24,14 +41,30 @@ def read_mission_file():
   # parse text into a list of tasks
   parsed_mission_file = mission_file.split(",")
   
-  mission_tasks = []
   for task_string in parsed_mission_file:
     # if we reached the completion time, then we're done parsing tasks
     task_string = task_string.lstrip()
     if not task_string[0].isalpha(): break
     
-    # set station letter
-    station = task_string[0]
+    # identify station
+    station_name = task_string[0]
+
+    if station_name == 'A':
+      current_station = station_A
+    elif station_name == 'B':
+      current_station = station_B
+    elif station_name == 'C':
+      current_station = station_C
+    elif station_name == 'D':
+      current_station = station_D
+    elif station_name == 'E':
+      current_station = station_E
+    elif station_name == 'F':
+      current_station = station_F
+    elif station_name == 'G':
+      current_station = station_G
+    elif station_name == 'H':
+      current_station = station_H
     
     # check if we are dealing with a valve
     valve_num = 0 # 1, 2, or 3
@@ -71,10 +104,13 @@ def read_mission_file():
       
     # add the task to our list
     if valve_num != 0:
-      task_tuple = (station, valve_num, valve_pos) # we have a valve task
+      # we have a valve_task
+      current_station.task_type = 'V'
+      task_tuple = (valve_num, valve_pos) # we have a valve task
     elif breaker_num != 0:
-      task_tuple = (station, breaker_box, breaker_num, breaker_pos) # we have a breaker task
-    
-    mission_tasks.append(task_tuple)
-  
-  return mission_tasks
+      # we have a breaker task
+      current_station.task_type = 'B'
+      task_tuple = ( breaker_box, breaker_num, breaker_pos) # we have a breaker task
+
+    # add task to appropriate station
+    current_station.task_list.append(task_tuple)
