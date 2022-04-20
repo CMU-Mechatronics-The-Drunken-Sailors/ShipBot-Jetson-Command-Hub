@@ -35,9 +35,11 @@ station_list = [station_A, station_B, station_C, station_D, station_E, station_F
 
 # returns list of tuples denoting tasks in order
 def read_mission_file():
+  global station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H
+
   # open file and return text
   filename = input("What is the mission file?\n")
-  file = open(filename, "r")
+  file = open("Command_Hub/mission_files/all_stations.txt", "r") # change this manually or set to filename for user input
   mission_file = file.read()
   
   # parse text into a list of tasks
@@ -108,11 +110,11 @@ def read_mission_file():
     if valve_num != 0:
       # we have a valve_task
       current_station.task_type = 'V'
-      task_tuple = (valve_num, valve_pos) # we have a valve task
+      task_tuple = (valve_num, valve_pos)
     elif breaker_num != 0:
       # we have a breaker task
       current_station.task_type = 'B'
-      task_tuple = ( breaker_box, breaker_num, breaker_pos) # we have a breaker task
+      task_tuple = ( breaker_box, breaker_num, breaker_pos)
 
     # add task to appropriate station
     current_station.task_list.append(task_tuple)

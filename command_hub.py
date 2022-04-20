@@ -11,6 +11,7 @@ from . import DC_motor_control as Mega
 from . import linear_actuator_control as Uno
 from . import stepper_motor_control as SKR
 from . import realsense_camera as camera
+from . import mission_parser as parser
 
 # user input for testing/debugging
 def manual_control():
@@ -49,18 +50,30 @@ def test_camera():
         cv2.imshow('depth', depth)
         cv2.waitKey(0)
 
+def test_parsing():
+    parser.read_mission_file()
+
+    for station in parser.station_list:
+        if station.task_list:
+            print("Station " + station.name + " has task type: " + station.task_type)
+            print(station.task_list)
+
 if __name__ == '__main__':
     # open USB ports
-    init.initialize_ports()
-    init.initialize_camera()
-    time.sleep(1)
+    # init.initialize_ports()
+    # init.initialize_camera()
+    # time.sleep(1)
 
     # grab user input and send to Mega/Uno/SKR
     # manual_control()
     
-    test_camera()
+    # test ability to grab frames
+    # test_camera()
 
-    # test DC functions
+    # test ability to parse mission files
+    # test_parsing()
+
+    # test DC motor/encoder functions
     # Mega.set_DC_motors(0, 0, 0, 0)
     # while True:
     #     t = time.time()
