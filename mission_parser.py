@@ -31,6 +31,8 @@ station_F = station('F')
 station_G = station('G')
 station_H = station('H')
 
+station_list = [station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H]
+
 # returns list of tuples denoting tasks in order
 def read_mission_file():
   # open file and return text
