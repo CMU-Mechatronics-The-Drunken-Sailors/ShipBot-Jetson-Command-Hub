@@ -2,7 +2,7 @@
 
 import serial
 import sys
-import initialization as init
+from . import initialization as init
 
 # sets X/Y positions for gantry and Z position for end-effector
 # arguments are optional
@@ -16,7 +16,7 @@ def build_command(x_pos = None, y_pos = None, z_pos = None):
     elif z_pos != None:
         command += " Z" + str(z_pos)
         
-    set_stepper_motor(command)
+    set_stepper_motors(command)
     
 # send to SKR
 def set_stepper_motors(stepper_commands):

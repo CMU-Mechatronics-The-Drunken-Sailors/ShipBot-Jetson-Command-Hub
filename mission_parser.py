@@ -12,7 +12,6 @@
 #
 # final value in the mission text is target completion time; we can ignore this and just go as fast as possible
 
-
 import sys
 
 # returns list of tuples denoting tasks in order
