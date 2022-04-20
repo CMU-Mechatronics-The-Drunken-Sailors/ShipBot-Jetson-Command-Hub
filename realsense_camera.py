@@ -1,19 +1,20 @@
 # for realsense camera, captures RGB and depth data
 # see: https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/examples/opencv_viewer_example.py
 
-import pyrealsense2.pyrealsense2 as rs
+import pyrealsense2 as rs
 import numpy as np
 import time
 import cv2
+from . import initialization as init
 
 # takes in camera pipeline and returns tuple of RGB & depth as numpy arrays
-def get_image(pipeline):
+def get_image():
     # wait for a coherent pair of frames: depth and color
-    frames = pipeline.wait_for_frames()
+    frames = init.pipeline.wait_for_frames()
     depth_frame = frames.get_depth_frame()
     color_frame = frames.get_color_frame()
     while not depth_frame or not color_frame:
-        frames = pipeline.wait_for_frames()
+        frames = init.pipeline.wait_for_frames()
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
         
