@@ -2,7 +2,7 @@
 
 import serial
 import sys
-import initialization as init
+from . import initialization as init
 
 # get encoder ticks from Mega
 # returns array of ints - M1 M2 M3 M4
@@ -18,7 +18,7 @@ def get_encoder_ticks():
     for ticks in mega_echo.split():
         try:
             encoder_ticks.append(int(ticks))
-        except ValueError():
+        except ValueError:
             pass
 
     # print(encoder_ticks)
