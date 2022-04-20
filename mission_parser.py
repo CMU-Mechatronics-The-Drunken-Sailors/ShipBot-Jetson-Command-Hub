@@ -18,7 +18,7 @@ import sys
 # returns list of tuples denoting tasks in order
 def read_mission_file():
   # open file and return text
-  filename = input("What is the mission file?")
+  filename = input("What is the mission file?\n")
   file = open(filename, "r")
   mission_file = file.read()
   
@@ -72,7 +72,7 @@ def read_mission_file():
       
     # add the task to our list
     if valve_num != 0:
-      task_tuple = (station, valve_num, valve_position) # we have a valve task
+      task_tuple = (station, valve_num, valve_pos) # we have a valve task
     elif breaker_num != 0:
       task_tuple = (station, breaker_box, breaker_num, breaker_pos) # we have a breaker task
     
