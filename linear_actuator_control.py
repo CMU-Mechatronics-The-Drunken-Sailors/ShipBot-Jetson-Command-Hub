@@ -2,7 +2,7 @@
 
 import serial
 import sys
-import initialization as init
+from . import initialization as init
 
 # LA pair retracted (R), LA solo retracted (R) -> -255 -255 -> arm is bent, tip is straight
 def retract_pair_retract_solo():
