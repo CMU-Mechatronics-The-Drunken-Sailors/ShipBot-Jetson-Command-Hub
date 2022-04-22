@@ -60,12 +60,12 @@ def test_parsing():
 
 if __name__ == '__main__':
     # open USB ports
-    # init.initialize_ports()
+    init.initialize_ports()
     # init.initialize_camera()
-    # time.sleep(1)
+    time.sleep(1)
 
     # grab user input and send to Mega/Uno/SKR
-    # manual_control()
+    manual_control()
     
     # test ability to grab frames
     # test_camera()

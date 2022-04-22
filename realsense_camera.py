@@ -34,3 +34,15 @@ def get_image():
         return (resized_color_image, depth_colormap)
     else:
         return (color_image, depth_colormap)
+
+
+align = rs.align(rs.stream.color)
+def get_rgb_depth():
+    # Get raw RGB and calibrated depth data, aligned to the RGB frame
+
+    # Get frameset of color and depth
+    frames = init.pipeline.wait_for_frames()
+    # frames.get_depth_frame() is a 640x360 depth image
+
+    # Align the depth frame to color frame
+    aligned_frames = align.process(frames)

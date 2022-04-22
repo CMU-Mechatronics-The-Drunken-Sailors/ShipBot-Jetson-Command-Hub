@@ -33,6 +33,13 @@ station_H = station('H')
 
 station_list = [station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H]
 
+# determine current station using class ID from feature detector
+def identify_station(class_id):
+  # check which station has this specific task
+  for station in station_list:
+    if station.task_type == class_id:
+      return station
+
 # returns list of tuples denoting tasks in order
 def read_mission_file():
   global station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H

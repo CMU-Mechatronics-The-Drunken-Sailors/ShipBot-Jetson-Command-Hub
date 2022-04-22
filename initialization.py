@@ -46,24 +46,31 @@ def initialize_camera():
     device = pipeline_profile.get_device()
     device_product_line = str(device.get_info(rs.camera_info.product_line))
 
+
     # Check if the camera has RGB color channels set up
     found_rgb = False
     for s in device.sensors:
         if s.get_info(rs.camera_info.name) == 'RGB Camera':
             found_rgb = True
+            # s.set_option(rs.option.enable_auto_white_balance, False) # NOT WORKING
             break
     if not found_rgb:
         print("The demo requires Depth camera with Color sensor")
         return None
 
     # enable depth image streaming
-    config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 15)
+    config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 15)
 
     # enable color image streaming
     if device_product_line == 'L500':
         config.enable_stream(rs.stream.color, 960, 540, rs.format.bgr8, 15)
     else:
-        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 15)
+        config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 15)
+
+    device.sensors[1].set_option(rs.option.white_balance, 3600) # 2800-6500/10 [4600]
+    device.sensors[1].set_option(rs.option.saturation, 66) # 0-100/1 [64]
+    device.sensors[1].set_option(rs.option.hue, 25) # -180-180/1 [0]
+    device.sensors[1].set_option(rs.option.exposure, 600) # 1-10000/1 [166]
 
     # start streaming
     pipeline.start(config)
