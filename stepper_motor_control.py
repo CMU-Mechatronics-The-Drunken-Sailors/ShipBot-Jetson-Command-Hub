@@ -33,9 +33,9 @@ def home_SKR():
 
     start_time = time.time()
 
-    set_stepper_motors("G92 Z0", dont_wait_for_echo=True)
-    send_SKR_command(z_pos=15, dont_wait_for_echo=True)
-    print("Moved Z forward a bit before homing")
+    set_stepper_motors("G92 X0 Y0 Z0", dont_wait_for_echo=True)
+    send_SKR_command(x_pos=15, y_pos=15, z_pos=15, dont_wait_for_echo=True)
+    print("Moved axes forward a bit before homing")
 
     command = "G28"
     set_stepper_motors(command, wait_for_ok=True)
