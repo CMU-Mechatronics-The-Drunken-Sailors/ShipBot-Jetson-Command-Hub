@@ -1,3 +1,5 @@
+import os
+
 # parses mission file and returns list of tuples denoting tasks in order
 #
 # tuples of two elements are valves: (valve-number, valve-position)
@@ -11,8 +13,6 @@
 # breaker-position is U (up) or D (down)
 #
 # final value in the mission text is target completion time; we can ignore this and just go as fast as possible
-
-import sys
 
 # create station class
 class station:
@@ -33,20 +33,13 @@ station_H = station('H')
 
 station_list = [station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H]
 
-# determine current station using class ID from feature detector
-def identify_station(class_id):
-  # check which station has this specific task
-  for station in station_list:
-    if station.task_type == class_id:
-      return station
-
 # returns list of tuples denoting tasks in order
 def read_mission_file():
   global station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H
 
   # open file and return text
   filename = input("What is the mission file?\n")
-  file = open("Command_Hub/mission_files/all_stations.txt", "r") # change this manually or set to filename for user input
+  file = open(os.path.join(os.path.dirname(__file__), "./mission_files/testbed_first_five.txt"), "r") # change this manually or set to filename for user input
   mission_file = file.read()
   
   # parse text into a list of tasks
