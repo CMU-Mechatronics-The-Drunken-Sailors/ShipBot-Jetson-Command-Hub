@@ -7,7 +7,7 @@ import os
 #
 # station is A-H
 # valve-number is 1, 2, or 3
-# valve-position is 0-360 if valve-number is 1 or 2, or 0 (open) and 1 (closed) if valve-number is 3
+# valve-position is 0-360 if valve-number is 1 or 2, or 0 (open) and 1 (close) if valve-number is 3
 # breaker-box is A or B
 # breaker-number is 1, 2, or 3
 # breaker-position is U (up) or D (down)
@@ -39,7 +39,7 @@ def read_mission_file():
 
   # open file and return text
   filename = input("What is the mission file?\n")
-  file = open(os.path.join(os.path.dirname(__file__), "./mission_files/testbed_first_five.txt"), "r") # change this manually or set to filename for user input
+  file = open(os.path.join(os.path.dirname(__file__), "./mission_files/testbed_all.txt"), "r") # change this manually or set to filename for user input
   mission_file = file.read()
   
   # parse text into a list of tasks
