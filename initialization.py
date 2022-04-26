@@ -70,7 +70,7 @@ def initialize_camera():
     device.sensors[1].set_option(rs.option.white_balance, 3600) # 2800-6500/10 [4600]
     device.sensors[1].set_option(rs.option.saturation, 66) # 0-100/1 [64]
     device.sensors[1].set_option(rs.option.hue, 25) # -180-180/1 [0]
-    device.sensors[1].set_option(rs.option.exposure, 166) # 1-10000/1 [166]
+    device.sensors[1].set_option(rs.option.exposure, 1000) # 1-10000/1 [166]
 
     # start streaming
     pipeline.start(config)

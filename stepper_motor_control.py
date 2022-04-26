@@ -11,7 +11,7 @@ old_x = 0
 old_y = 0
 old_z = 0
 
-TIME_PAUSE = 0.5
+TIME_PAUSE = 0
 def calcMoveTime(x, y, z):
     times = []
     amax = 100
@@ -77,6 +77,13 @@ def send_SKR_command(x_pos = None, y_pos = None, z_pos = None, dont_wait_for_ech
     old_y = new_y
     old_z = new_z
 
+# moves the XY gantry in an arc motion
+def send_SKR_command_arc(x_end, y_end, dont_wait_for_echo=False):
+    radius = 1
+    command = "G2 X" + x_end + " Y" + y_end + " R" + radius
+
+    print(command)
+    set_stepper_motors(command, dont_wait_for_echo=dont_wait_for_echo)
 
     
 # send to SKR
