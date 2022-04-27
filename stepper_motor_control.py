@@ -40,7 +40,7 @@ def home_SKR():
     command = "G28"
     set_stepper_motors(command, wait_for_ok=True)
 
-    wait_time = 45
+    wait_time = 30
     time.sleep(max(0, wait_time - (time.time() - start_time))) # In case 'ok' was returned early, just wait min 30 seconds
     print("Homing done!")
 
@@ -83,7 +83,13 @@ def send_SKR_command(x_pos = None, y_pos = None, z_pos = None, dont_wait_for_ech
 # radius is 16mm for gate valves, 29mm for rotary valve
 # alpha is the initial angle, omega is the target angle (radians for both)
 # we move counterclockwise like a normal unit circle :)
-def send_SKR_command_arc(x_init, y_init, alpha, omega, radius):
+def send_SKR_command_arc(x_init, y_init, alpha, omega, radius, upwards, direction=None):
+    # G17 for XY plane, G18 for ZX plane
+    if upwards:
+        set_stepper_motors("G18")
+    else:
+        set_stepper_motors("G17")
+
     arc_direction = "" # G2 is clockwise, G3 is counter-clockwise
     target_angle = 0 # needs to be in radians, eventually
 
@@ -95,6 +101,10 @@ def send_SKR_command_arc(x_init, y_init, alpha, omega, radius):
     else:
         arc_direction = "G3 "
         target_angle = alpha - omega
+
+    # manually set for rotary valve
+    if direction != None:
+        arc_direction = direction
 
     # find the center of the gate valve, accounting for our flipped x-axis
     x_center = x_init + radius * np.cos(alpha)
