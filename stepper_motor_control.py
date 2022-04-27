@@ -40,7 +40,8 @@ def home_SKR():
     command = "G28"
     set_stepper_motors(command, wait_for_ok=True)
 
-    time.sleep(max(0, 45 - (time.time() - start_time))) # In case 'ok' was returned early, just wait min 30 seconds
+    wait_time = 45
+    time.sleep(max(0, wait_time - (time.time() - start_time))) # In case 'ok' was returned early, just wait min 30 seconds
     print("Homing done!")
 
     old_x = 0
@@ -77,13 +78,45 @@ def send_SKR_command(x_pos = None, y_pos = None, z_pos = None, dont_wait_for_ech
     old_y = new_y
     old_z = new_z
 
-# moves the XY gantry in an arc motion
-def send_SKR_command_arc(x_end, y_end, dont_wait_for_echo=False):
-    radius = 1
-    command = "G2 X" + x_end + " Y" + y_end + " R" + radius
+# moves the gantry in an arc motion
+# x_center and y_center are the current position of the XY gantry
+# radius is 16mm for gate valves, 29mm for rotary valve
+# alpha is the initial angle, omega is the target angle (radians for both)
+# we move counterclockwise like a normal unit circle :)
+def send_SKR_command_arc(x_init, y_init, alpha, omega, radius):
+    arc_direction = "" # G2 is clockwise, G3 is counter-clockwise
+    target_angle = 0 # needs to be in radians, eventually
+
+    print("angles: " + str(alpha) + " " + str(omega))
+
+    if (alpha < omega):
+        arc_direction = "G2 "
+        target_angle = omega - alpha
+    else:
+        arc_direction = "G3 "
+        target_angle = alpha - omega
+
+    # find the center of the gate valve, accounting for our flipped x-axis
+    x_center = x_init + radius * np.cos(alpha)
+    y_center = y_init - radius * np.sin(alpha)
+    
+    print("center: " + str(x_center) + " " + str(y_center))
+
+    # find target location, accounting for our flipped x-axis
+    x_target = (x_center) - radius * np.cos(omega)
+    y_target = (y_center) + radius * np.sin(omega)
+
+    command = str(arc_direction) + "X" + str(x_target) + " Y" + str(y_target) + " R" + str(radius)
 
     print(command)
-    set_stepper_motors(command, dont_wait_for_echo=dont_wait_for_echo)
+    set_stepper_motors(command)
+
+    # account for arc travel time
+    waiting_time = calcMoveTime(0, 0, radius * target_angle)
+    print(f"Waiting for {waiting_time} seconds")
+    time.sleep(waiting_time)
+
+    return x_target, y_target
 
     
 # send to SKR

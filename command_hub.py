@@ -15,6 +15,8 @@ from . import mission_parser as parser
 
 # user input for testing/debugging
 def manual_control():
+    SKR.home_SKR()
+
     while (1):
         # send DC motor commands to Mega
         DC_commands = input("DC Motor Commands:\n")
