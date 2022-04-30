@@ -48,7 +48,6 @@ def home_SKR():
     old_y = 0
     old_z = 0
 
-
 # sets X/Y positions for gantry and Z position for end-effector
 # arguments are optional
 def send_SKR_command(x_pos = None, y_pos = None, z_pos = None, dont_wait_for_echo=False):
@@ -128,7 +127,6 @@ def send_SKR_command_arc(x_init, y_init, alpha, omega, radius, upwards, directio
 
     return x_target, y_target
 
-    
 # send to SKR
 def set_stepper_motors(stepper_commands, wait_for_ok=False, dont_wait_for_echo=False):
     stepper_commands += '\n'
