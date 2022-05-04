@@ -39,7 +39,7 @@ def read_mission_file():
 
   # open file and return text
   filename = input("What is the mission file?\n")
-  file = open(os.path.join(os.path.dirname(__file__), "./mission_files/rotary_valve.txt"), "r") # change this manually or set to filename for user input
+  file = open(os.path.join(os.path.dirname(__file__), "./mission_files/mission_file_2.txt"), "r") # change this manually or set to filename for user input
   mission_file = file.read()
   
   # parse text into a list of tasks
