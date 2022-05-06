@@ -1,4 +1,4 @@
-# command hub for Jetson Nano
+# command hub for Jetson Nano - allows manual control for debugging
 # communicates with Mega, Uno, and SKR boards
 # for Mega, sends command of 4 values indicating velocity for each DC motor (deg/sec per motor)
 # for Uno, sends command of 2 values indicating direction of linear actuators (pair and solo LAs)
